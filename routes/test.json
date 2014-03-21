@@ -1,0 +1,7 @@
+{
+    "simulationID": "NoName_2014-03-21_09.26.43.315",
+    "buildingName": "NoName",
+    "weather": "USA_PA_Philadelphia.Intl.AP.724080_TMY3",
+    "idfName": "NoName_2014-03-21_09.26.43.315_input.idf",
+    "outputPath": "../simulations/NoName_2014-03-21_09.26.43.315/"
+}

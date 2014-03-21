@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>IDF Creator - EnergyPlus</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" href="http://cdn2.editmysite.com/css/sites.css?buildTime=1364334319" type="text/css" /><link rel='stylesheet' type='text/css' href='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.css?1364334319' />
+<link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1364334319' type='text/css' />
+<link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
+<style type='text/css'>
+.wsite-elements div.paragraph, .wsite-elements p, .wsite-elements .product-block .product-title, .wsite-elements .product-description, .wsite-elements .wsite-form-field label, .wsite-elements .wsite-form-field label, #wsite-content div.paragraph, #wsite-content p, #wsite-content .product-block .product-title, #wsite-content .product-description, #wsite-content .wsite-form-field label, #wsite-content .wsite-form-field label, .blog-sidebar div.paragraph, .blog-sidebar p, .blog-sidebar .wsite-form-field label, .blog-sidebar .wsite-form-field label {}
+#wsite-content div.paragraph, #wsite-content p, #wsite-content .product-block .product-title, #wsite-content .product-description, #wsite-content .wsite-form-field label, #wsite-content .wsite-form-field label, .blog-sidebar div.paragraph, .blog-sidebar p, .blog-sidebar .wsite-form-field label, .blog-sidebar .wsite-form-field label {}
+.wsite-elements h2, .wsite-elements .product-long .product-title, .wsite-elements .product-large .product-title, .wsite-elements .product-small .product-title, #wsite-content h2, #wsite-content .product-long .product-title, #wsite-content .product-large .product-title, #wsite-content .product-small .product-title, .blog-sidebar h2 {}
+#wsite-content h2, #wsite-content .product-long .product-title, #wsite-content .product-large .product-title, #wsite-content .product-small .product-title, .blog-sidebar h2 {}
+#wsite-title {}
+</style>
+<style type='text/css'>
+.wsite-header {
+	/*background-image: url(img/idf-creator.png) !important;*/
+	background-position: 0 0 !important;
+	width:100%;
+}
+</style>
+<script type='text/javascript'><!--
+var STATIC_BASE = 'http://cdn1.editmysite.com/';
+var STYLE_PREFIX = 'wsite';
+//-->
+</script>
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+<script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery_effects.js?1364334319'></script>
+<script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery.animate.js?1364334319'></script>
+<script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1364334319'></script>
+<script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1364334319'></script>
+<script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1364334319'></script>
+<script type='text/javascript'><!--
+var IS_ARCHIVE=1;
+(function(jQuery){
+function initFlyouts(){initPublishedFlyoutMenus([{"id":"307697036285990396","title":"E+WEB","url":"index"},{"id":"340087776255019572","title":"IDF Creator","url":"idf-creator"}],'340087776255019572',"<li class='wsite-nav-more'><a href='#'>more...<\/a><\/li>",'active',false)}
+if (jQuery) {
+if (jQuery.browser.msie) window.onload = initFlyouts;
+else jQuery(initFlyouts)
+}else{
+if (Prototype.Browser.IE) window.onload = initFlyouts;
+else document.observe('dom:loaded', initFlyouts);
+}
+})(window._W && _W.jQuery)
+//-->
+</script>
+</head>
+<body id="section-index wsite-theme-light" class=' wsite-theme-light wsite-page-idf-creator'>
+<div id="navigation">
+
+
+<ul><li id='pg307697036285990396'><a href='index'>E+WEB</a></li><li id='active'><a href='idf-creator'>IDF Creator</a></li><li id='pg420754484990937029'><a href='http://apps1.eere.energy.gov/buildings/energyplus/cfm/inputs/index.cfm'>E+ Example File Generator</a></li></ul>
+
+
+</div><!-- end id:navigation -->
+
+
+<div id="container">
+
+
+<div id="headertext">
+<h1><span class='wsite-logo'><a href=''><span id="wsite-title">EnergyPlus</span></a></span></h1>
+</div><!-- end id:header -->
+
+  
+<div id="header-outer" >
+<img class="wsite-header" src="img/idf-creator.png">
+</div>
+<!-- end id:headerimage -->
+
+<div id="content">
+
+<div id='wsite-content' class='wsite-elements wsite-not-footer'>
+<h2 style="text-align:center;"><span style="font-weight: normal;">Create an Input Data File (IDF) for EnergyPlus run<br /></span><br /></h2>
+
+<div><div class="wsite-multicol"><div class='wsite-multicol-table-wrap' style='margin:0 -15px'>
+<table class='wsite-multicol-table'>
+<tbody class='wsite-multicol-tbody'>
+<tr class='wsite-multicol-tr'>
+<td class='wsite-multicol-col' style='width:54.947916666667%;padding:0 15px'>
+
+<h2 style="text-align:left;">BUILDING</h2>
+
+<div><div id="961929744182957493" align="left" style="width: 100%; overflow-y: hidden;" class="wcustomhtml"><div align="left">
+    <p>
+        <label>Name:
+            <input type="text" name="name" size="30" maxlength="20"
+            />
+        </label>
+    </p>
+    <br>
+    <p>
+        <label>Location:
+            <select name="locationID">
+        	<option value=8>San Franscisco, CA</option>
+	<option value=1>Chicago, IL</option>
+	<option value=5>Philadelphia, PA</option>
+	<option value=6>Pittsburgh, PA</option>
+	<option value=3 >Phoenix, AZ</option>
+	<option value=4 >Sacramento, CA</option>
+	<option value=7 >State College, PA</option>
+	<option value=2 >Nashville, TN</option>
+		</select>
+        </label>
+    </p>
+    <br>
+    <p>
+        <label>Type:
+            <select name="type" size="1">
+                <option value="Vacant">Vacant</option>
+                <option value="Office/Professional" selected="selected">Office/Professional</option>
+                <option value="Laboratory">Laboratory</option>
+                <option value="Warehouse(nonrefrig)">Warehouse(nonrefrig)</option>
+                <option value="Food Sales">Food Sales</option>
+                <option value="Public Order and Safety">Public Order and Safety</option>
+                <option value="Health Care (outpatient)">Health Care (outpatient)</option>
+                <option value="Warehouse(refrig)">Warehouse(refrig)</option>
+                <option value="Religious Worship">Religious Worship</option>
+                <option value="Public Assembly">Public Assembly</option>
+                <option value="Education">Education</option>
+                <option value="Food Service">Food Service</option>
+                <option value="Health Care(inpatient)">Health Care(inpatient)</option>
+                <option value="Skilled Nursing">Skilled Nursing</option>
+                <option value="Lodging">Lodging</option>
+                <option value="Strip Shopping Mall">Strip Shopping Mall</option>
+                <option value="Enclosed Mall">Enclosed Mall</option>
+                <option value="Retail(excl.Mall)">Retail(excl.Mall)</option>
+                <option value="Service">Service</option>
+                <option value="Other">Other</option>
+            </select>
+        </label>
+    </p>
+    <br>
+    <p>
+        <label>Floors:
+            <input type="text" name="size" size="10" maxlength="10" />
+        </label></p>
+        <br>
+    <p>
+        <label>Area:
+            <input type="text" name="floors" size="7" maxlength="20" />
+        </label>
+        m2
+    </p>
+    <br>
+    <p>
+        <label>Windows:
+            <input type="text" name="orientation" size="7" maxlength="20"
+            />
+        </label>%</p>
+</div></div>
+
+
+
+</div>
+
+<div><div class="wsite-multicol"><div class='wsite-multicol-table-wrap' style='margin:0 -0px'>
+<table class='wsite-multicol-table'>
+<tbody class='wsite-multicol-tbody'>
+<tr class='wsite-multicol-tr'>
+<td class='wsite-multicol-col' style='width:35.583068626547%;padding:0 0px'></td>
+<td class='wsite-multicol-col' style='width:29.183236139758%;padding:0 0px'>
+
+<div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0;margin-right:0;text-align:right">
+<a>
+<img src="img/openstudio.png" alt="Picture" style="width:auto;max-width:100%" />
+</a>
+<div style="display:block;font-size:90%"></div>
+</div></div>
+
+</td>
+<td class='wsite-multicol-col' style='width:35.233695233695%;padding:0 0px'>
+
+<div style="text-align:right;"><div style="height: 10px; overflow: hidden;"></div>
+<a class="wsite-button wsite-button-small wsite-button-normal" href="javascript:;" >
+<span class="wsite-button-inner">CREATE IDF &gt;&gt;</span>
+</a>
+<div style="height: 10px; overflow: hidden;"></div></div>
+
+</td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+
+</td>
+<td class='wsite-multicol-col' style='width:45.052083333333%;padding:0 15px'>
+
+<h2 style="text-align:left;">IDF</h2>
+
+<div><div id="124167517485929176" align="left" style="width: 100%; overflow-y: hidden;" class="wcustomhtml"><textarea cols="50" rows="40">
+Custom IDF code create here
+</textarea></div>
+
+
+
+</div>
+
+<div class="paragraph" style="text-align:right;"><u>COPY IDF to Clipboard</u> &nbsp; &nbsp;| &nbsp;<u>RUN in E+WEB</u></div>
+
+</td>
+</tr>
+</tbody>
+</table>
+</div></div></div></div>
+    
+
+</div><!-- end id:content -->
+</div><!-- end id:container --><div id="footer">
+</div><!-- end id:footer -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-26348074-9', 'energyplus.io');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
