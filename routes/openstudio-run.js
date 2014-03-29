@@ -1,5 +1,5 @@
 var fs = require("fs"); //Nodejs File System
-//var openstudio = require("OpenStudio").openstudio;
+var openstudio = require("OpenStudio").openstudio;
 
 console.log("READ BUILDING INPUT JSON:");//------------------------------------------------------------------------------
 
