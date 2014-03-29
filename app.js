@@ -26,8 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 express.static.mime.define({'text/plain': ['idf', 'osm', 'epw', 'err', 'idd', 'eio','audit','bnd','end', 'eso','mdd','mtd','mtr','rdd','shd']});
 express.static.mime.default_type = "text/plain"; //to render files without an extention, i.e. stdout, stderr
 app.use(express.directory('public'));
-app.use('/simulations', express.directory('../simulations', {icons:true}));
-app.use('/simulations', express.static('../simulations'));
+app.use('/runs', express.directory('../runs', {icons:true}));
+app.use('/runs', express.static('../runs'));
 
 // Routes
 
@@ -43,8 +43,8 @@ app.get('/idf-creator', function(req, res){
   res.render('idf-creator');
 });
 
-var simulate = require('./routes/simulate.js');
-app.post('/simulate', simulate.energyplus);
+var run = require('./routes/run.js');
+app.post('/run', run.energyplus);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
