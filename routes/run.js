@@ -48,7 +48,7 @@ module.exports = {energyplus: function(request, response) {
     console.log('Input file saved!');
 
     function puts(error, stdout, stderr) { sys.puts(stdout); }
-    exec('node ./routes/openstudio-run.js '+buildingJSONName+' 2>&1 | tee 'outputPath+"progress.txt', function(error, stdout, stderr){
+    exec('node ./routes/openstudio-run.js '+buildingJSONName+' 2>&1 | tee '+outputPath+'progress.txt', function(error, stdout, stderr){
         response.redirect(outputPath);
     });
 
