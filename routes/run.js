@@ -18,7 +18,7 @@ module.exports = {energyplus: function(request, response) {
     var simulationID =  buildingName+timestamp;
 
     //CREATE unique simulation Folder
-    var simulationsPath = "../simulations/";  //CHANGE for your local setup: update bitnami to your username, make simulations directory
+    var simulationsPath = "../runs/";  //CHANGE for your local setup: update bitnami to your username, make simulations directory
     var outputPath = simulationsPath + simulationID +"/";
     fs.mkdirSync(outputPath, function(error) {if (error) throw error;});
     
