@@ -1,0 +1,72 @@
+<html>
+
+<head>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+        var io = io.connect();
+    
+        // Emit ready event.
+        io.emit('ready'); 
+        
+            
+        $(document).ready(function() {
+            
+            var container = $('#container');
+            
+            io.on('connect', function(data) {
+                var newItem = $('<div>' + data.message + '</div>');
+                container.append(newItem);
+            });  
+            
+            $("#execute").click(function(){
+                io.emit('execute');
+            }); 
+            
+            io.on('new-line', function(data) {
+                    var newItem = $('<div>' + data.message + '</div>');
+                    container.append(newItem);
+            }); 
+            
+            $("form").on( "submit", function(event) {
+              event.preventDefault();
+              var body = $("form").serialize();
+              console.log(body);
+              
+              io.emit('run', body);
+            });
+            io.on('form-data', function(data) {
+                    var newItem = $('<div>' + data.message + '</div>');
+                    container.append(newItem);
+            }); 
+            
+
+        });
+        
+    </script>
+    <style type="text/css">
+    .console {
+      font-family:Courier;
+      color: #CCCCCC;
+      background: #000000;
+      border: 3px double #CCCCCC;
+      padding: 10px;
+    }
+    </style>
+</head>
+
+<body>
+    <h2>WebSockets Logger with Express.io</h2>
+    <form name="form" id="form">
+        Building Name:<input type="text" name="buildingName" /><br> 
+        Weather: <input type="text" name="weather" /> <br> 
+        IDF: <input type="text" name="inputDataFile" /> <br> 
+        <input type="submit" value="RUN" />
+    </form>
+    <input id="execute" type="button" value="Execute 'ls -al'">
+    <pre>
+    <div id="container" class="console"></div>
+    </pre>
+</body>
+
+</html>
