@@ -9,3 +9,5 @@ cd /usr/local/bin/;
 sudo ln -s /usr/local/EnergyPlus-8-0-0/EnergyPlus;
 sudo ln -s /usr/local/EnergyPlus-8-0-0/ExpandObjects;
 sudo ln -s /usr/local/EnergyPlus-8-0-0/EPMacro;
+#Add energy plus applications to the system PATH
+export PATH=$PATH:/usr/local/EnergyPlus-8-0-0/;
