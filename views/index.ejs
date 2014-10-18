@@ -3,6 +3,7 @@
 <head>
     <title>EnergyPlus - E+WEB</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script>
@@ -15,6 +16,7 @@
         $(document).ready(function() {
             
             var terminal = $('#terminal');
+            var outputs = $('#outputs');
             
             // io.on('connect', function(data) {
             //     var newItem = $('<div>' + data.message + '</div>');
@@ -22,15 +24,25 @@
             // });  
             
             $("form").on( "submit", function(event) {
+              $('#terminal').show();
+              terminal.append("EnergyPlus.io starting up in browser...");
               event.preventDefault();
               var body = $("form").serialize();
               console.log(body);
               
               io.emit('run', body);
             });
+            
             io.on('form-data', function(data) {
                 var newItem = $('<div>' + data.message + '</div>');
                 terminal.append(newItem);
+            }); 
+            
+            io.on('output-data', function(data) {
+                console.log(data.message);
+                $('#outputs').show();
+                var newOutput = $(data.message);
+                outputs.append(newOutput);
             }); 
             
 
@@ -98,13 +110,14 @@
         <div id="content">
             <form name="form" id="form" > <!--REMOVED ATTRIBUTES FROM POST:  action="/run" method="post" onsubmit="loading();return true;"-->
             <div id='wsite-content' class='wsite-elements wsite-not-footer'>
-                <h2 style="text-align:center; font-weight:normal;">Run EnergyPlus in the web</h2>
+                <h2 style="text-align:center; font-weight:normal;"><i>run energyplus online</i></h2>
+        
 <table width="100%">
   <tr>
-    <th width="50%" style="text-align:left"><h2>Building Name <input type="text" name="buildingName"></h2></th>
-    <th width="50%" style="text-align:left">
-        <h2>Weather <span style="font-size:12px;font-weight: normal;">(.epw) </span>
-        <select class="span3" value="this.value" id="weather" name="weather">
+    <th width="50%" style="text-align:left"><h2 style="font-weight:normal;">Building Name <input type="text" name="buildingName" style="height:30px;margin-bottom:0px;" class="span2"></h2></th>
+    <th width="50%" style="text-align:right">
+        <h2 style="font-weight:normal;">Weather <span style="font-size:12px;font-weight: normal;">(.epw) </span>
+        <select class="span2" value="this.value" id="weather" name="weather">
             <option value="USA_PA_Philadelphia.Intl.AP.724080_TMY3" selected>Philadelphia, PA</option>
             <option value="USA_NM_Albuquerque.Intl.AP.723650_TMY3">Albuquerque, NM</option>
             <option value="USA_MD_Baltimore-Washington.Intl.AP.724060_TMY3">Baltimore, MD</option>
@@ -127,7 +140,7 @@
   </tr>
 </table>
                    
- <h2 style="text-align:left;">Input Data File <span style="font-size:12px;font-weight: normal;">(.idf) </span></h2>
+<h2 style="text-align:left;font-weight:normal;">Input Data File <span style="font-size:12px;font-weight: normal;">(.idf) </span></h2>
 <textarea style="width:100%;" cols="45" rows="60" name="inputDataFile" form="form">
 Version, 8.0.0;  
   
@@ -175,23 +188,31 @@ Output:Table:SummaryReports,
 <i><p style="text-align:right">copy your IDF text into field above</p></i>
                                                
 <div style="height:20px; overflow: hidden;"></div>
-<input type="submit" class="btn btn-large btn-success" value="RUN ENERGYPLUS">
+<input type="submit" class="btn btn-success" value="Run EnergyPlus">
 <div style="height: 20px; overflow: hidden;"></div>
 
 </div>
 </div>
 </form>
 
+
+<div id="terminal" class="terminal" hidden>
 <pre style="padding:0px;margin:0px;margin-bottom:0px;">
-<div id="terminal" class="terminal"></div>
+</div>
 </pre>
+
+
+<div id="outputs" class="wsite-elements wsite-not-footer" style="margin:22px;" hidden>
+    <h2 style="font-weight:normal;font-size: 16px;">Outputs</h2>
+</div>
 
 <!-- end id:content -->
 </div>
 <!-- end id:container -->
 <div class="footer" style="text-align:center; font-weight:bold;color:#585858;">
+<br>
 <p>Designed & Developed by <a href="http://www.joshwentz.net">Josh Wentz</a>, Nick Mattise, <a href="http://blog.emptycrate.com/about">Jason Turner</a>, Mohammad Heidarinejad, Ying Sun, <a href="http://joshuakuiros.com/about/">Josh Kurios</a></p>
-<p>Powered by <a href="https://openstudio.nrel.gov/">OpenStudio</a>, <a href="http://apps1.eere.energy.gov/buildings/energyplus/">EnergyPlus</a>, <a href="http://nodejs.org/">Node.js</a>, <a href="http://express-io.org/">Express+Socket.io</a>, <a href="http://www.ubuntu.com/">Ubuntu Linux</a> | <a href="https://raw.githubusercontent.com/buildsci/energyplus.io/master/LICENSE">Open Source MIT License</a> | <a href="https://github.com/buildsci/energyplus.io">Fork on Github</a></p>
+<p>Powered by <a href="https://openstudio.nrel.gov/">OpenStudio</a>, <a href="http://apps1.eere.energy.gov/buildings/energyplus/">EnergyPlus</a>, <a href="http://nodejs.org/">Node.js</a>, <a href="http://express-io.org/">Express+Socket.io</a>, <a href="http://www.ubuntu.com/server">Ubuntu Linux</a> | <a href="https://raw.githubusercontent.com/buildsci/energyplus.io/master/LICENSE">Open Source MIT License</a> | <a href="https://github.com/buildsci/energyplus.io">Fork on Github</a></p>
 <p>Made possible by over five years of support from <a href="http://www.buildsci.us/people.html">Dr. Jelena Srebric</a> & the <a href="http://www.buildsci.us/">building science GROUP</a></p>
 </div>
 <!-- end id:footer -->
