@@ -49,18 +49,27 @@ app.io.route('execute', function(req) {
 });
 
 app.io.route('run', function(req) {
-    console.log('EnergyPlus on Node.js starting up...');
-    console.log('FORM DATA:');
+    var string;
+    
+    string = 'EnergyPlus.io starting up on server...';
+    req.io.emit('form-data', {message: string});
+    
+    string = 'FORM DATA...';
+    req.io.emit('form-data', {message: string});
+    
     console.log(req.data);
     var querystring = require('querystring');
     var building = querystring.parse(req.data);
     console.log(building);
     
-    var string = JSON.stringify(building);
+    string = JSON.stringify(building);
     req.io.emit('form-data', {message: string});
 
     //CREATE unique simulation Name & Timestamp ID
-    console.log("Creating unique Building Name & Folder...");
+    
+    string = "Creating unique Building Name & Folder...";
+    req.io.emit('form-data', {message: string});
+    
     var buildingName = building.buildingName.replace(/\s+/g, '') || "NoName";
     var timestamp = require("./routes/timestamp.js").createTimestamp();
     var simulationID =  buildingName+timestamp;
@@ -76,7 +85,10 @@ app.io.route('run', function(req) {
 
     //FORMAT request.body json to match buildingData2.json
     var buildingJSONName = outputPath + simulationID +'_input.json';
-    console.log("BUILDING DATA:");
+    
+    string = "BUILDING DATA...";
+    req.io.emit('form-data', {message: string});
+    
     var buildingJSON =
         {
         "simulationID": simulationID,
@@ -92,7 +104,9 @@ app.io.route('run', function(req) {
     var fileString = JSON.stringify(buildingJSON, null, 4);
     req.io.emit('form-data', {message: fileString});
     fs.writeFileSync(buildingJSONName, fileString);
-    console.log('Input file saved!');
+    
+    string = 'Input file saved at energyplus.io/runs/'+simulationID;
+    req.io.emit('form-data', {message: string});
     
     var fork = require('child_process').fork;
     var command = fork("./routes/openstudio-run.js", [buildingJSONName], {silent: true }); //silent because http://stackoverflow.com/questions/22275556/node-js-forked-pipe
@@ -106,6 +120,12 @@ app.io.route('run', function(req) {
         var line = data.toString();
         req.io.emit('form-data', {message: line});
     });
+    
+    string = "<a  target='_blank' href='http://energyplus.io/runs/"+simulationID+"/1-EnergyPlus-0/eplustbl.htm'>Summary of Building Energy Consumption</a><br>";
+    req.io.emit('output-data', {message: string});
+    string = "<a target='_blank' href='http://energyplus.io/runs/"+simulationID+"/1-EnergyPlus-0/'>All Files</a>";
+    req.io.emit('output-data', {message: string});
+    
     
 });
 
